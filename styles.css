@@ -1,0 +1,54 @@
+/* General body and background */
+body {
+  background-color: #121212; /* Dark background for contrast */
+  color: white; /* White text for better readability */
+  font-family: 'Arial', sans-serif;
+}
+
+/* Neon Effect for Headings */
+h1, h2, h3 {
+  text-align: center;
+  color: #00ff99; /* Neon green */
+  text-shadow: 0 0 5px #00ff99, 0 0 10px #00ff99, 0 0 15px #00ff99;
+}
+
+/* Neon Glow Button */
+button {
+  background-color: transparent;
+  border: 2px solid #00ff99; /* Neon green border */
+  color: #00ff99;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #00ff99;
+  color: #121212;
+  box-shadow: 0 0 10px #00ff99, 0 0 20px #00ff99;
+}
+
+/* Neon Effect for Cards or Containers */
+.card {
+  background-color: #1a1a1a; /* Dark background for cards */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px #00ff99, 0 0 20px #00ff99;
+  color: white;
+}
+
+/* Neon Border on Focus */
+input:focus, select:focus, textarea:focus {
+  border: 2px solid #00ff99;
+  outline: none;
+}
+
+/* Additional neon effects for text */
+.neon-text {
+  color: #00ff99;
+  text-shadow: 0 0 5px #00ff99, 0 0 10px #00ff99, 0 0 15px #00ff99;
+}
