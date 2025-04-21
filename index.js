@@ -117,3 +117,66 @@ const App = () => {
 };
 
 export default App;
+
+import React, { useState, useEffect } from 'react';
+import './styles.css';
+
+const App = () => {
+  const [player1Score, setPlayer1Score] = useState(0);
+  const [player2Score, setPlayer2Score] = useState(0);
+  const [matchHistory, setMatchHistory] = useState([]);
+  
+  const winSound = new Audio('/path/to/win.mp3');  // Replace with actual path
+  const scoreSound = new Audio('/path/to/score.mp3');  // Replace with actual path
+
+  const playWinSound = () => winSound.play();
+  const playScoreSound = () => scoreSound.play();
+
+  useEffect(() => {
+    const savedHistory = JSON.parse(localStorage.getItem('matchHistory')) || [];
+    setMatchHistory(savedHistory);
+  }, []);
+
+  const endMatch = () => {
+    const winner = player1Score > player2Score ? 'Player 1' : 'Player 2';
+    const match = { player1Score, player2Score, winner };
+    const newHistory = [...matchHistory, match];
+    setMatchHistory(newHistory);
+    localStorage.setItem('matchHistory', JSON.stringify(newHistory));
+    playWinSound();  // Play win sound when match ends
+    resetScores();
+  };
+
+  const resetScores = () => {
+    setPlayer1Score(0);
+    setPlayer2Score(0);
+  };
+
+  return (
+    <div className="App">
+      <h1>Pool Scoreboard</h1>
+      <div className="scoreboard">
+        <div>
+          <h2>Player 1: {player1Score}</h2>
+          <button onClick={() => { setPlayer1Score(player1Score + 1); playScoreSound(); }}>Add Point</button>
+        </div>
+        <div>
+          <h2>Player 2: {player2Score}</h2>
+          <button onClick={() => { setPlayer2Score(player2Score + 1); playScoreSound(); }}>Add Point</button>
+        </div>
+      </div>
+      <button onClick={endMatch}>End Match</button>
+
+      <h2>Match History</h2>
+      <ul>
+        {matchHistory.map((match, index) => (
+          <li key={index}>
+            {`Match ${index + 1}: ${match.winner} wins! - Player 1: ${match.player1Score}, Player 2: ${match.player2Score}`}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default App;
