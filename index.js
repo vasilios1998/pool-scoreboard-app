@@ -29,3 +29,34 @@ return ( <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6"> {players.ma
 
 ); }
 
+import React, { useState } from 'react';
+import './styles.css';
+
+const App = () => {
+  const [isSpinning, setIsSpinning] = useState(false);
+  const [result, setResult] = useState('');
+
+  const options = ["Normal Play", "Trick Shot", "Double Points", "One Handed", "Speed Round"];
+
+  const spinWheel = () => {
+    setIsSpinning(true);
+    setTimeout(() => {
+      const randomIndex = Math.floor(Math.random() * options.length);
+      setResult(options[randomIndex]);
+      setIsSpinning(false);
+    }, 2000); // Spins for 2 seconds
+  };
+
+  return (
+    <div className="App">
+      <h1>Spin the Wheel</h1>
+      <div className={`wheel ${isSpinning ? 'spinning' : ''}`}></div>
+      <button onClick={spinWheel} disabled={isSpinning}>
+        {isSpinning ? 'Spinning...' : 'Spin the Wheel'}
+      </button>
+      <p className="result">{result && `Result: ${result}`}</p>
+    </div>
+  );
+};
+
+export default App;
